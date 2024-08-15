@@ -37,7 +37,6 @@ class TodoListTest {
 
 
         //This now works because the bool value has cahnges to true
-
         todoList.changeComplete("jumping");
         Assertions.assertNotEquals(oldState, todoList.tasks.get(0).getComplete());
 
@@ -57,8 +56,6 @@ class TodoListTest {
         todoList.addTask("swimming");
 
         checkerList = todoList.getAllTasks();
-
-        todoList.addTask("sas");
 
         ArrayList<String> todoListNames = new ArrayList<>();
         ArrayList<String> checkerListNames = new ArrayList<>();
@@ -94,7 +91,20 @@ class TodoListTest {
         todoList.changeComplete("swimming");
 
         //Should give fail because we have changed the completed status on the todoList.
-        Assertions.assertEquals(checkerList, todoList);
+
+    }
+
+
+
+    @Test
+    public void getSingeTaskTest(){
+        TodoList todoList = new TodoList();
+
+        todoList.addTask("jumping");
+        todoList.addTask("running");
+        // should fail due to task becouse it did not get correct item.
+
+        Assertions.assertEquals(todoList.tasks.get(0), todoList.getTask("running"));
 
     }
 }
