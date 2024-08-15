@@ -49,42 +49,52 @@ class TodoListTest {
     @Test
     public void getAllTasksTest() {
         TodoList todoList = new TodoList();
-        ArrayList<Task> checkerList = new ArrayList<>();
 
         todoList.addTask("jumping");
         todoList.addTask("running");
         todoList.addTask("swimming");
 
-        checkerList = todoList.getAllTasks();
+        ArrayList<String> actualTaskNames = new ArrayList<>();
 
 
-        Assertions.assertEquals(checkerList, todoList.getAllTasks());
+        for (Task task : todoList.getAllTasks()) {
+            actualTaskNames.add(task.getName());
+        }
+
+        ArrayList<String> expectedTaskNames = new ArrayList<>();
+        expectedTaskNames.add("jumping");
+        expectedTaskNames.add("running");
+        expectedTaskNames.add("swimming");
+
+        Assertions.assertEquals(expectedTaskNames, actualTaskNames);
     }
 
 
     @Test
-    public void getCompletedTest() {
+    public void getCompletedTasksTest() {
         TodoList todoList = new TodoList();
-        TodoList checkerList = new TodoList();
 
-        //Initially all set as false when add
         todoList.addTask("jumping");
         todoList.addTask("running");
         todoList.addTask("swimming");
 
-        checkerList.addTask("jumping");
-        checkerList.addTask("running");
-        checkerList.addTask("swimming");
+        ArrayList<String> expectedTaskNames = new ArrayList<>();
+        expectedTaskNames.add("jumping");
+        expectedTaskNames.add("swimming");
 
-        //change to completed for jumping and swimming
-        todoList.changeComplete("jumping");
-        todoList.changeComplete("swimming");
 
-        //Should give fail because we have changed the completed status on the todoList.
+        //todoList.tasks.get(0).setComplete();
+        todoList.tasks.get(2).setComplete();
+
+        ArrayList<String> actualTaskNames = new ArrayList<>();
+        for (Task task : todoList.getCompletedTasks()) {
+            actualTaskNames.add(task.getName());
+        }
+
+
+        Assertions.assertEquals(expectedTaskNames, actualTaskNames);
 
     }
-
-
 
     @Test
     public void getSingeTaskTest(){
@@ -92,7 +102,7 @@ class TodoListTest {
 
         todoList.addTask("jumping");
         todoList.addTask("running");
-        // should fail due to task becouse it did not get correct item.
+        // should fail due to task because it did not get correct item.
 
         Assertions.assertEquals(todoList.tasks.get(1), todoList.getTask("running"));
     }

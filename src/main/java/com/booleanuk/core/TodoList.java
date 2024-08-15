@@ -49,18 +49,17 @@ public class TodoList {
 
 
 
-    public ArrayList<Task> getCompletedTasks(boolean isComplete){
+    public ArrayList<Task> getCompletedTasks(){
 
         ArrayList<Task> completedTasks = new ArrayList<>();
 
-        if (isComplete) {
-
-        }
-
-
         for(int i = 0; i < tasks.size(); i++){
-            if(tasks.get(i).getComplete()){
+
+            if(tasks.get(i).getComplete() == true){
                 completedTasks.add(tasks.get(i));
+
+
+
 
             }
         }
