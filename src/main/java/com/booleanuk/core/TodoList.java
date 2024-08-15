@@ -22,8 +22,16 @@ public class TodoList {
                 return "Removed";
             }
         }
-
         return "Not in list";
+    }
+
+    public Task getTask(String findTask){
+        for(int i = 0; i < tasks.size(); i++){
+            if(tasks.get(i).getName() == findTask){
+                return tasks.get(i);
+            }
+        }
+        return null;
     }
 
     public void changeComplete(String findTask){
@@ -39,9 +47,16 @@ public class TodoList {
         return this.tasks;
     }
 
-    public ArrayList<Task> getCompletedTasks(){
+
+
+    public ArrayList<Task> getCompletedTasks(boolean isComplete){
 
         ArrayList<Task> completedTasks = new ArrayList<>();
+
+        if (isComplete) {
+
+        }
+
 
         for(int i = 0; i < tasks.size(); i++){
             if(tasks.get(i).getComplete()){

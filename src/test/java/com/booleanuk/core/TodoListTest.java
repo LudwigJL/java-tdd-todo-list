@@ -57,18 +57,8 @@ class TodoListTest {
 
         checkerList = todoList.getAllTasks();
 
-        ArrayList<String> todoListNames = new ArrayList<>();
-        ArrayList<String> checkerListNames = new ArrayList<>();
 
-        for (int i = 0; i < todoList.tasks.size(); i++) {
-            todoListNames.add(todoList.tasks.get(i).getName());
-        }
-
-        for (int i = 0; i < checkerList.size(); i++) {
-            checkerListNames.add(checkerList.get(i).getName());
-        }
-
-        Assertions.assertEquals(checkerListNames, todoListNames);
+        Assertions.assertEquals(checkerList, todoList.getAllTasks());
     }
 
 
@@ -105,7 +95,6 @@ class TodoListTest {
         // should fail due to task becouse it did not get correct item.
 
         Assertions.assertEquals(todoList.tasks.get(1), todoList.getTask("running"));
-
     }
 }
 
