@@ -83,7 +83,7 @@ class TodoListTest {
         expectedTaskNames.add("swimming");
 
 
-        //todoList.tasks.get(0).setComplete();
+        todoList.tasks.get(0).setComplete();
         todoList.tasks.get(2).setComplete();
 
         ArrayList<String> actualTaskNames = new ArrayList<>();
