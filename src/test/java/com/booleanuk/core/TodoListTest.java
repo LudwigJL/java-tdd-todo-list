@@ -17,9 +17,8 @@ class TodoListTest {
         TodoList todoList = new TodoList();
 
 
-        //Redtest
-        //Will fail because of jumping not in list
-        //todoList.addTask("jumping");
+
+        todoList.addTask("jumping");
         todoList.addTask("sprinting");
 
         Assertions.assertEquals("Removed", todoList.removeTask("jumping"));
