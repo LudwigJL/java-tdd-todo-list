@@ -25,6 +25,15 @@ public class TodoList {
         return "Not in list";
     }
 
+    public void changeComplete(String findTask){
+        for(int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getName() == findTask) {
+                tasks.get(i).setComplete();
+
+            }
+        }
+    }
+
 
 
 
