@@ -56,7 +56,7 @@ class TodoListTest {
         todoList.addTask("running");
         todoList.addTask("swimming");
 
-        Task objOne = new Task("thisIsWrong");
+        Task objOne = new Task("jumping");
         Task objTwo = new Task("running");
         Task objThree = new Task("swimming");
 
