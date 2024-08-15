@@ -10,7 +10,7 @@ class TaskObjTest {
     @Test
     public void addTaskTest() {
         TodoList todoList = new TodoList();
-        Assertions.assertFalse(todoList.addTask("name"));
+        Assertions.assertTrue(todoList.addTask("name"));
 
     }
 }
