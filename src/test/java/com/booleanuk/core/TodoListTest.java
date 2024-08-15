@@ -104,7 +104,7 @@ class TodoListTest {
         todoList.addTask("running");
         // should fail due to task becouse it did not get correct item.
 
-        Assertions.assertEquals(todoList.tasks.get(0), todoList.getTask("running"));
+        Assertions.assertEquals(todoList.tasks.get(1), todoList.getTask("running"));
 
     }
 }
