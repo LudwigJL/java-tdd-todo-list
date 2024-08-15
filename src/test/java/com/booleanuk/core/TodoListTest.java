@@ -36,7 +36,7 @@ class TodoListTest {
         boolean oldState = todoList.tasks.get(0).getComplete();
 
 
-        //This now works because the bool value has cahnges to true
+        //This now works because the bool value has changes to true
         todoList.changeComplete("jumping");
         Assertions.assertNotEquals(oldState, todoList.tasks.get(0).getComplete());
 
