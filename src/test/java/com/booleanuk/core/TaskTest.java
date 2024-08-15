@@ -13,4 +13,16 @@ class TaskObjTest {
         Assertions.assertTrue(todoList.addTask("name"));
 
     }
+
+    @Test
+    public void removeTaskTest(){
+        TodoList todoList = new TodoList();
+
+        //Will fail if task not in list
+        //todoList.addTask("jumping");
+        todoList.addTask("sprinting");
+
+        Assertions.assertEquals("Removed", todoList.removeTask("jumping"));
+    }
 }
+
