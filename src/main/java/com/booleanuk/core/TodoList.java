@@ -25,13 +25,13 @@ public class TodoList {
         return "Not in list";
     }
 
-    public Task getTask(String findTask){
+    public String getTask(String findTask){
         for(int i = 0; i < tasks.size(); i++){
             if(tasks.get(i).getName() == findTask){
-                return tasks.get(i);
+                return "Task found";
             }
         }
-        return null;
+        return "Task not found";
     }
 
     public void changeComplete(String findTask){
