@@ -97,6 +97,34 @@ class TodoListTest {
     }
 
     @Test
+    public void getNotCompletedTasksTest() {
+        TodoList todoList = new TodoList();
+
+        todoList.addTask("jumping");
+        todoList.addTask("running");
+        todoList.addTask("swimming");
+
+        ArrayList<String> expectedTaskNames = new ArrayList<>();
+
+        //Expect running which should be completed.  therefore giving a failed test
+        expectedTaskNames.add("swimming");
+        expectedTaskNames.add("running");
+
+
+        todoList.tasks.get(0).setComplete();
+        todoList.tasks.get(2).setComplete();
+
+        ArrayList<String> actualTaskNames = new ArrayList<>();
+        for (Task task : todoList.getNotCompletedTasks()) {
+            actualTaskNames.add(task.getName());
+        }
+
+
+        Assertions.assertEquals(expectedTaskNames, actualTaskNames);
+
+    }
+
+    @Test
     public void getSingeTaskTest(){
         TodoList todoList = new TodoList();
 

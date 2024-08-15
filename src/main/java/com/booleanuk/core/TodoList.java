@@ -66,6 +66,22 @@ public class TodoList {
         return completedTasks;
     }
 
+    public ArrayList<Task> getNotCompletedTasks(){
+
+        ArrayList<Task> unCompletedTasks = new ArrayList<>();
+
+        for(int i = 0; i < tasks.size(); i++){
+
+            if(tasks.get(i).getComplete() == false){
+                unCompletedTasks.add(tasks.get(i));
+
+
+            }
+        }
+        return unCompletedTasks;
+    }
+
+
 
 
 
