@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TodoList {
 
@@ -15,7 +16,7 @@ public class TodoList {
 
     public String removeTask(String findTask){
         for(int i = 0; i < tasks.size(); i++){
-            if(tasks.get(i).getName() == findTask){
+            if(Objects.equals(tasks.get(i).getName(), findTask)){
                 tasks.remove(tasks.get(i));
 
                 return "Removed";
@@ -33,6 +34,25 @@ public class TodoList {
             }
         }
     }
+
+    public ArrayList<Task> getAllTasks(){
+        return this.tasks;
+    }
+
+    public ArrayList<Task> getCompletedTasks(){
+
+        ArrayList<Task> completedTasks = new ArrayList<>();
+
+        for(int i = 0; i < tasks.size(); i++){
+            if(tasks.get(i).getComplete()){
+                completedTasks.add(tasks.get(i));
+
+            }
+        }
+        return completedTasks;
+    }
+
+
 
 
 
