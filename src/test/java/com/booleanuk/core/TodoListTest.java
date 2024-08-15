@@ -23,5 +23,16 @@ class TodoListTest {
 
         Assertions.assertEquals("Removed", todoList.removeTask("jumping"));
     }
+
+    @Test
+    public void setCompleteTest(){
+        TodoList todoList = new TodoList();
+        todoList.addTask("jumping");
+
+        //Redtest
+        //setCompleted changes the Task object's boolean value to the opposite. this function should return true if it works.
+        //Sould fail due to the asserEquals false.
+        Assertions.assertEquals(false,  todoList.setCompleted("jumping"));
+    }
 }
 
