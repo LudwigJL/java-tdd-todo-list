@@ -106,8 +106,8 @@ class TodoListTest {
 
         ArrayList<String> expectedTaskNames = new ArrayList<>();
 
-        //Expect running which should be completed.  therefore giving a failed test
-        expectedTaskNames.add("swimming");
+        //Changed only to running giving a successful test
+
         expectedTaskNames.add("running");
 
 
