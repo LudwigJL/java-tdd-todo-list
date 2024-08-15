@@ -56,13 +56,9 @@ class TodoListTest {
         todoList.addTask("running");
         todoList.addTask("swimming");
 
-        Task objOne = new Task("jumping");
-        Task objTwo = new Task("running");
-        Task objThree = new Task("swimming");
+        checkerList = todoList.getAllTasks();
 
-        checkerList.add(objOne);
-        checkerList.add(objTwo);
-        checkerList.add(objThree);
+        todoList.addTask("sas");
 
         ArrayList<String> todoListNames = new ArrayList<>();
         ArrayList<String> checkerListNames = new ArrayList<>();
@@ -78,6 +74,30 @@ class TodoListTest {
         Assertions.assertEquals(checkerListNames, todoListNames);
     }
 
+
+    @Test
+    public void getCompletedTest() {
+        TodoList todoList = new TodoList();
+        TodoList checkerList = new TodoList();
+
+        //Initially all set as false when add
+        todoList.addTask("jumping");
+        todoList.addTask("running");
+        todoList.addTask("swimming");
+
+        checkerList.addTask("jumping");
+        checkerList.addTask("running");
+        checkerList.addTask("swimming");
+
+        //change to completed for jumping and swimming
+        todoList.changeComplete("jumping");
+        todoList.changeComplete("swimming");
+
+        //Should give fail because we have changed the completed status on the todoList.
+        Assertions.assertEquals(checkerList, todoList);
+
+    }
 }
+
 
 
