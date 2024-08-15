@@ -8,6 +8,7 @@ class TodoListTest {
     @Test
     public void addTaskTest() {
         TodoList todoList = new TodoList();
+
         Assertions.assertTrue(todoList.addTask("name"));
 
     }
@@ -16,8 +17,6 @@ class TodoListTest {
     public void removeTaskTest(){
         TodoList todoList = new TodoList();
 
-
-
         todoList.addTask("jumping");
         todoList.addTask("sprinting");
 
@@ -25,13 +24,20 @@ class TodoListTest {
     }
 
     @Test
-    public void setCompleteTest(){
+    public void changeCompleteTest(){
         TodoList todoList = new TodoList();
         todoList.addTask("jumping");
 
-        //Greentest
-        //expected value true, it passes meaning the .setCompleted value is working.
-        Assertions.assertEquals(true,  todoList.setCompleted("jumping"));
+        boolean oldState = todoList.tasks.get(0).getComplete();
+
+
+        //Should not be equals when changeComplete is working. == fail
+
+        todoList.changeComplete("jumping");
+        Assertions.assertEquals(oldState, todoList.tasks.get(0).getComplete());
+
+        todoList.changeComplete("jumping");
+        Assertions.assertEquals(oldState, todoList.tasks.get(0).getComplete());
     }
 }
 
