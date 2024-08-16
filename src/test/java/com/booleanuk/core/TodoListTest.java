@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 class TodoListTest {
 
@@ -134,7 +136,42 @@ class TodoListTest {
 
         Assertions.assertEquals("Task found", todoList.getTask("running"));
     }
+
+    @Test
+    public void getSortedTasksTest(){
+        TodoList todoList = new TodoList();
+
+        todoList.addTask("swimming");
+        todoList.addTask("jumping");
+        todoList.addTask("running");
+        todoList.addTask("swimming");
+
+        ArrayList<String> expectedTaskNames = new ArrayList<>();
+        expectedTaskNames.add("swimming");
+        expectedTaskNames.add("jumping");
+        expectedTaskNames.add("running");
+        expectedTaskNames.add("swimming");
+
+        //Sort ordinary array
+        Collections.sort(expectedTaskNames);
+
+        //bool param acending true gives ascending list and false give descending list
+        //Should now fail becouse param is set as false.
+        todoList.getSortedTasks(false);
+
+        ArrayList<String> actualTaskNames = new ArrayList<>();
+        for (Task task : todoList.getNotCompletedTasks()) {
+            actualTaskNames.add(task.getName());
+        }
+
+        Assertions.assertEquals(expectedTaskNames, actualTaskNames);
+
+
+
+
+
+
+    }
+
 }
-
-
 

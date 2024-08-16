@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class TodoList {
@@ -81,10 +82,15 @@ public class TodoList {
         return unCompletedTasks;
     }
 
-    //ascending
-
-
-    //descending
+    public void getSortedTasks(boolean ascending){
+        ArrayList<Task> sortedTasks = new ArrayList<>();
+        if(ascending){
+            this.tasks.sort(Comparator.comparing(Task::getName));
+        }
+        else {
+            this.tasks.sort(Comparator.comparing(Task::getName).reversed());
+        }
+    }
 
 
 
