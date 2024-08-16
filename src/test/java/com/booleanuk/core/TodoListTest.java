@@ -155,9 +155,9 @@ class TodoListTest {
         //Sort ordinary array
         Collections.sort(expectedTaskNames);
 
-        //bool param acending true gives ascending list and false give descending list
-        //Should now fail becouse param is set as false.
-        todoList.getSortedTasks(false);
+        //bool param ascending true gives ascending list and false give descending list
+        //Should now not fail because bool is set as true giving an ascending order which match up with the expectedtaskNames
+        todoList.getSortedTasks(true);
 
         ArrayList<String> actualTaskNames = new ArrayList<>();
         for (Task task : todoList.getNotCompletedTasks()) {
