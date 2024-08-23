@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 class TodoListTest {
@@ -13,165 +12,141 @@ class TodoListTest {
     public void addTaskTest() {
         TodoList todoList = new TodoList();
 
-        Assertions.assertTrue(todoList.addTask("name"));
+        Assertions.assertEquals("Swimming", todoList.addTask("Swimming"));
+        Assertions.assertEquals("Running", todoList.addTask("Running"));
+
 
     }
 
     @Test
-    public void removeTaskTest() {
+    public void removeTaskTest(){
         TodoList todoList = new TodoList();
 
-        todoList.addTask("jumping");
-        todoList.addTask("sprinting");
+        todoList.addTask("Swimming");
+        todoList.addTask("Running");
+        todoList.addTask("Sprinting");
 
-        Assertions.assertEquals("Removed", todoList.removeTask("jumping"));
+        todoList.removeTask(1);
+        ArrayList<String> currentTodos = todoList.getAllTasks();
+
+        Assertions.assertNotEquals("Running", currentTodos.get(1));
     }
 
     @Test
-    public void changeCompleteTest() {
-
-        //Should change complete
-
-        TodoList todoList = new TodoList();
-        todoList.addTask("jumping");
-
-        boolean oldState = todoList.tasks.get(0).getComplete();
-
-
-        //This now works because the bool value has changes to true
-        todoList.changeComplete("jumping");
-        Assertions.assertNotEquals(oldState, todoList.tasks.get(0).getComplete());
-
-
-        //running it again it should work changing it back to false
-        todoList.changeComplete("jumping");
-        Assertions.assertEquals(oldState, todoList.tasks.get(0).getComplete());
-    }
-
-    @Test
-    public void getAllTasksTest() {
+    public void getAllTasks(){
         TodoList todoList = new TodoList();
 
-        todoList.addTask("jumping");
-        todoList.addTask("running");
-        todoList.addTask("swimming");
+        todoList.addTask("Swimming");
+        todoList.addTask("Running");
+        todoList.addTask("Sprinting");
 
-        ArrayList<String> actualTaskNames = new ArrayList<>();
+        ArrayList<String> listOfTasks = todoList.getAllTasks();
 
-
-        for (Task task : todoList.getAllTasks()) {
-            actualTaskNames.add(task.getName());
-        }
-
-        ArrayList<String> expectedTaskNames = new ArrayList<>();
-        expectedTaskNames.add("jumping");
-        expectedTaskNames.add("running");
-        expectedTaskNames.add("swimming");
-
-        Assertions.assertEquals(expectedTaskNames, actualTaskNames);
-    }
-
-
-    @Test
-    public void getCompletedTasksTest() {
-        TodoList todoList = new TodoList();
-
-        todoList.addTask("jumping");
-        todoList.addTask("running");
-        todoList.addTask("swimming");
-
-        ArrayList<String> expectedTaskNames = new ArrayList<>();
-        expectedTaskNames.add("jumping");
-        expectedTaskNames.add("swimming");
-
-
-        todoList.tasks.get(0).setComplete();
-        todoList.tasks.get(2).setComplete();
-
-        ArrayList<String> actualTaskNames = new ArrayList<>();
-        for (Task task : todoList.getCompletedTasks()) {
-            actualTaskNames.add(task.getName());
-        }
-
-
-        Assertions.assertEquals(expectedTaskNames, actualTaskNames);
+        Assertions.assertEquals("Swimming", listOfTasks.get(0));
+        Assertions.assertEquals("Running", listOfTasks.get(1));
+        Assertions.assertEquals("Sprinting", listOfTasks.get(2));
 
     }
 
     @Test
-    public void getNotCompletedTasksTest() {
+    public void changeStatusTest(){
         TodoList todoList = new TodoList();
 
-        todoList.addTask("jumping");
-        todoList.addTask("running");
-        todoList.addTask("swimming");
+        todoList.addTask("Swimming");
+        Assertions.assertEquals(false, todoList.getTask(0).getComplete());
 
-        ArrayList<String> expectedTaskNames = new ArrayList<>();
-
-        //Changed only to running giving a successful test
-
-        expectedTaskNames.add("running");
-
-
-        todoList.tasks.get(0).setComplete();
-        todoList.tasks.get(2).setComplete();
-
-        ArrayList<String> actualTaskNames = new ArrayList<>();
-        for (Task task : todoList.getNotCompletedTasks()) {
-            actualTaskNames.add(task.getName());
-        }
-
-
-        Assertions.assertEquals(expectedTaskNames, actualTaskNames);
+        todoList.changeComplete(0);
+        Assertions.assertEquals(true, todoList.getTask(0).getComplete());
 
     }
 
     @Test
-    public void getSingeTaskTest(){
+    public void getCompletedtasks(){
         TodoList todoList = new TodoList();
 
-        todoList.addTask("jumping");
-        todoList.addTask("running");
-        // should fail due to task because it did not get correct item.
+        todoList.addTask("Swimming");
+        todoList.addTask("Running");
+        todoList.addTask("Sprinting");
+        todoList.changeComplete(1);
+        todoList.changeComplete(2);
 
-        Assertions.assertEquals("Task found", todoList.getTask("running"));
+        ArrayList<String> expectedListOfCompletedTasks = new ArrayList<>();
+        expectedListOfCompletedTasks.add("Running");
+        expectedListOfCompletedTasks.add("Sprinting");
+
+        Assertions.assertEquals(expectedListOfCompletedTasks, todoList.getCompletedTasks());
+
     }
 
     @Test
-    public void getSortedTasksTest(){
+    public void getNotCompletedtasks(){
         TodoList todoList = new TodoList();
 
-        todoList.addTask("swimming");
-        todoList.addTask("jumping");
-        todoList.addTask("running");
-        todoList.addTask("swimming");
+        todoList.addTask("Swimming");
+        todoList.addTask("Running");
+        todoList.addTask("Sprinting");
+        todoList.changeComplete(1);
+        todoList.changeComplete(2);
 
-        ArrayList<String> expectedTaskNames = new ArrayList<>();
-        expectedTaskNames.add("swimming");
-        expectedTaskNames.add("jumping");
-        expectedTaskNames.add("running");
-        expectedTaskNames.add("swimming");
+        ArrayList<String> expectedListOfCompletedTasks = new ArrayList<>();
+        expectedListOfCompletedTasks.add("Swimming");
 
-        //Sort ordinary array
-        Collections.sort(expectedTaskNames);
-
-        //bool param ascending true gives ascending list and false give descending list
-        //Should now not fail because bool is set as true giving an ascending order which match up with the expectedtaskNames
-        todoList.getSortedTasks(true);
-
-        ArrayList<String> actualTaskNames = new ArrayList<>();
-        for (Task task : todoList.getNotCompletedTasks()) {
-            actualTaskNames.add(task.getName());
-        }
-
-        Assertions.assertEquals(expectedTaskNames, actualTaskNames);
-
-
-
-
-
+        Assertions.assertEquals(expectedListOfCompletedTasks, todoList.getNotCompletedTasks());
 
     }
+
+    @Test
+    public void checkIfTaskExists(){
+        TodoList todoList = new TodoList();
+
+        todoList.addTask("Swimming");
+        todoList.addTask("Running");
+        todoList.addTask("Sprinting");
+
+
+        Assertions.assertEquals("Task is in the list", todoList.checkTask("Sprinting"));
+        Assertions.assertEquals("Task was not found perhaps it does not exist", todoList.checkTask("Rowing"));
+    }
+
+    @Test
+    public void checkSortAlphabetically(){
+        TodoList todoList = new TodoList();
+
+        todoList.addTask("Swimming");
+        todoList.addTask("Running");
+        todoList.addTask("Sprinting");
+
+        ArrayList<String> expectedListOfCompletedTasks = new ArrayList<>();
+        expectedListOfCompletedTasks.add("Swimming");
+        expectedListOfCompletedTasks.add("Running");
+        expectedListOfCompletedTasks.add("Sprinting");
+
+        Collections.sort(expectedListOfCompletedTasks);
+
+
+        Assertions.assertEquals(expectedListOfCompletedTasks, todoList.sortAlphabetically(false));
+
+    }
+
+    @Test
+    public void checkSortAlphabeticallyReverse(){
+        TodoList todoList = new TodoList();
+
+        todoList.addTask("Swimming");
+        todoList.addTask("Running");
+        todoList.addTask("Sprinting");
+
+        ArrayList<String> expectedListOfCompletedTasks = new ArrayList<>();
+        expectedListOfCompletedTasks.add("Swimming");
+        expectedListOfCompletedTasks.add("Running");
+        expectedListOfCompletedTasks.add("Sprinting");
+
+        Collections.sort(expectedListOfCompletedTasks, Collections.reverseOrder());
+
+        Assertions.assertEquals(expectedListOfCompletedTasks, todoList.sortAlphabetically(true));
+    }
+
+
 
 }
 

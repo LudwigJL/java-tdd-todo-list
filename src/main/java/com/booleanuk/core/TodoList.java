@@ -1,80 +1,81 @@
 package com.booleanuk.core;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Objects;
+import java.util.*;
 
 public class TodoList {
 
-    ArrayList<Task> tasks = new ArrayList<>();
+    HashMap<Integer, Task> tasks;
+    int idCounter = 0;
 
-    public boolean addTask(String name){
+    public TodoList(){
+        tasks = new HashMap<>();
+    }
+
+    //Works
+    public String addTask(String name){
+        int uniqueID = idCounter;
         Task task = new Task(name);
-        tasks.add(task);
+        System.out.println(task.getName());
+
+        tasks.put(uniqueID, task);
+        idCounter++;
+
+        return task.getName();
+    }
+
+    //Works
+    public boolean removeTask(Integer ID){
+        tasks.remove(ID);
 
         return true;
     }
 
-    public String removeTask(String findTask){
-        for(int i = 0; i < tasks.size(); i++){
-            if(Objects.equals(tasks.get(i).getName(), findTask)){
-                tasks.remove(tasks.get(i));
-
-                return "Removed";
-            }
-        }
-        return "Not in list";
+    //Works
+    public Task getTask(Integer ID){
+        return tasks.get(ID);
     }
 
-    public String getTask(String findTask){
-        for(int i = 0; i < tasks.size(); i++){
-            if(tasks.get(i).getName() == findTask){
-                return "Task found";
-            }
+    //Works
+    public ArrayList<String> getAllTasks(){
+        ArrayList<String> allTasks = new ArrayList<>();
+
+        for(Integer i : tasks.keySet()){
+            allTasks.add(tasks.get(i).getName());
         }
-        return "Task not found";
-    }
 
-    public void changeComplete(String findTask){
-        for(int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getName() == findTask) {
-                tasks.get(i).setComplete();
-
-            }
-        }
-    }
-
-    public ArrayList<Task> getAllTasks(){
-        return this.tasks;
+        return allTasks;
     }
 
 
-
-    public ArrayList<Task> getCompletedTasks(){
-
-        ArrayList<Task> completedTasks = new ArrayList<>();
-
-        for(int i = 0; i < tasks.size(); i++){
-
-            if(tasks.get(i).getComplete() == true){
-                completedTasks.add(tasks.get(i));
+    //WORKS
+    public void changeComplete(Integer ID){
+        tasks.get(ID).setComplete();
+    }
 
 
+    //Works
+    public ArrayList<String> getCompletedTasks(){
 
+        ArrayList<String> completedTasks = new ArrayList<>();
 
+        for (Integer i : tasks.keySet()) {
+            if (tasks.get(i).getComplete()) {
+                completedTasks.add(tasks.get(i).getName());
             }
         }
+
         return completedTasks;
     }
 
-    public ArrayList<Task> getNotCompletedTasks(){
+    //works
+    public ArrayList<String> getNotCompletedTasks(){
 
-        ArrayList<Task> unCompletedTasks = new ArrayList<>();
+        ArrayList<String> unCompletedTasks = new ArrayList<>();
 
         for(int i = 0; i < tasks.size(); i++){
 
             if(tasks.get(i).getComplete() == false){
-                unCompletedTasks.add(tasks.get(i));
+                unCompletedTasks.add(tasks.get(i).getName());
 
 
             }
@@ -82,15 +83,41 @@ public class TodoList {
         return unCompletedTasks;
     }
 
-    public void getSortedTasks(boolean ascending){
-        ArrayList<Task> sortedTasks = new ArrayList<>();
-        if(ascending){
-            this.tasks.sort(Comparator.comparing(Task::getName));
+    public String checkTask(String name){
+
+        for (Integer i : tasks.keySet()){
+            if(tasks.get(i).getName() == name){
+                return "Task is in the list";
+            }
+        }
+
+        return "Task was not found perhaps it does not exist";
+    }
+
+    public ArrayList<String> sortAlphabetically(boolean reverse){
+        ArrayList<String> sortedList = new ArrayList<>();
+
+        for(Integer i : tasks.keySet()){
+            sortedList.add(tasks.get(i).getName());
+        }
+
+        if(!reverse){
+            Collections.sort(sortedList);
         }
         else {
-            this.tasks.sort(Comparator.comparing(Task::getName).reversed());
+            Collections.sort(sortedList, Collections.reverseOrder());
         }
+
+        return sortedList;
     }
+
+
+    public void changeName(Integer id, String newName){
+
+    }
+
+
+
 
 
 
