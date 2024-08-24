@@ -11,11 +11,9 @@ public class TodoList {
         tasks = new HashMap<>();
     }
 
-    //Works
     public String addTask(String name){
         int uniqueID = idCounter;
         Task task = new Task(name);
-        System.out.println(task.getName());
 
         tasks.put(uniqueID, task);
         idCounter++;
@@ -23,19 +21,20 @@ public class TodoList {
         return task.getName();
     }
 
-    //Works
-    public boolean removeTask(Integer ID){
+    public String removeTask(Integer ID){
         tasks.remove(ID);
 
-        return true;
+        return "removed";
     }
 
-    //Works
     public Task getTask(Integer ID){
-        return tasks.get(ID);
+        if(tasks.get(ID) != null){
+            return tasks.get(ID);
+        }
+        else return null;
+
     }
 
-    //Works
     public ArrayList<String> getAllTasks(){
         ArrayList<String> allTasks = new ArrayList<>();
 
@@ -47,13 +46,11 @@ public class TodoList {
     }
 
 
-    //WORKS
     public void changeComplete(Integer ID){
         tasks.get(ID).setComplete();
     }
 
 
-    //Works
     public ArrayList<String> getCompletedTasks(){
 
         ArrayList<String> completedTasks = new ArrayList<>();
@@ -67,7 +64,6 @@ public class TodoList {
         return completedTasks;
     }
 
-    //works
     public ArrayList<String> getNotCompletedTasks(){
 
         ArrayList<String> unCompletedTasks = new ArrayList<>();
@@ -115,7 +111,6 @@ public class TodoList {
     public void changeName(Integer ID, String newName){
             Task item = tasks.get(ID);
             item.setName(newName);
-
     }
 
 

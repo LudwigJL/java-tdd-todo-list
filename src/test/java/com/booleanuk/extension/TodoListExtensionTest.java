@@ -57,8 +57,6 @@ public class TodoListExtensionTest {
 
         todoList.addTask("Running");
         Assertions.assertEquals("2024/08/24", todoList.getTask(0).getDate());
-
-
     }
 
 
