@@ -15,6 +15,10 @@ public class Task {
         return name;
     }
 
+    public String setName(String newName){
+        return this.name = newName;
+    }
+
     public boolean getComplete(){
         return complete;
     }

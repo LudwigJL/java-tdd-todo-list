@@ -29,7 +29,7 @@ public class TodoListExtensionTest {
         //Now I want to change Swimming to Dishing.
         todoList.changeName(0, "Dishing");
 
-        //Now the name of ID 0 will be changed from swimming to dishing. This will fail because method not yet implemented
+        //Now the name of ID 0 will be changed from swimming to dishing.
         Assertions.assertEquals("Dishing", todoList.getTask(0).getName());
     }
 

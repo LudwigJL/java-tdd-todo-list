@@ -86,7 +86,7 @@ public class TodoList {
     public String checkTask(String name){
 
         for (Integer i : tasks.keySet()){
-            if(tasks.get(i).getName() == name){
+            if(Objects.equals(tasks.get(i).getName(), name)){
                 return "Task is in the list";
             }
         }
@@ -112,7 +112,9 @@ public class TodoList {
     }
 
 
-    public void changeName(Integer id, String newName){
+    public void changeName(Integer ID, String newName){
+            Task item = tasks.get(ID);
+            item.setName(newName);
 
     }
 
